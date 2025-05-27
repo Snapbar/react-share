@@ -146,7 +146,8 @@ export default function ShareButton<LinkOptions extends Record<string, unknown>>
       }
     }
 
-    const link = networkLink(url, opts);
+    const resolvedUrl = typeof url === 'function' ? await url() : url;
+    const link = networkLink(resolvedUrl, opts);
 
     if (openShareDialogOnClick) {
       const windowConfig = {
